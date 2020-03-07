@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${title}"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-primary btn-xs">Register new client</a>					
+				</h4>
+
+				<table class="table table-striped table-bordered">
+					<thead class="thead-inverse">
+						<tr>
+							<th sec:authorize="hasRole('ROLE_USER')">id</th>
+							<th>name</th>
+							<th>last name</th>
+							<th>email</th>
+							<th>date</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">create invoice</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">edit</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cliente: ${clients}">
+							<td sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-primary btn-xs" 
+							th:href="@{/ver/} + ${cliente.id}" th:text="${cliente.id}"></a></td>
+							<td th:text="${cliente.name}"></td>
+							<td th:text="${cliente.lastName}"></td>
+							<td th:text="${cliente.email}"></td>
+							<td th:text="${cliente.createdAt}"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-success btn-xs"
+								th:href="@{'/invoices/form/' + ${cliente.id}}"
+								th:text="'create invoice'"></a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs"
+								th:href="@{/form/} + ${cliente.id}" th:text="'editar'"></a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs"
+								th:href="@{/delete/} + ${cliente.id}" th:text="'eliminar'"
+								onclick="return confirm('Do you want to delete this item?');"></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
