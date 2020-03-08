@@ -1,13 +1,13 @@
-package com.efteam.omservice;
+package com.umss.dev.training.jtemplate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OmserviceApplication {
+public class JTemplateServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OmserviceApplication.class, args);
+		SpringApplication.run(JTemplateServiceApplication.class, args);
 	}
 
 }

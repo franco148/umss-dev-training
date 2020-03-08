@@ -8,10 +8,10 @@
 		<version>2.2.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.efteam</groupId>
-	<artifactId>overhead-management-service</artifactId>
+	<groupId>com.umss.dev.training</groupId>
+	<artifactId>java-project-template</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>omservice</name>
+	<name>java-project-template</name>
 	<description>Demo project for Spring Boot for EF Team</description>
 
 	<properties>

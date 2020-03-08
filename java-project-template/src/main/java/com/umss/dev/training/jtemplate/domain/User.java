@@ -1,4 +1,4 @@
-package com.efteam.omservice.domain;
+package com.umss.dev.training.jtemplate.domain;
 
 import javax.persistence.*;
 

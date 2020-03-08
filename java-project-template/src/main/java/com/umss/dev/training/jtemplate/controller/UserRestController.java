@@ -1,7 +1,7 @@
-package com.efteam.omservice.controller;
+package com.umss.dev.training.jtemplate.controller;
 
-import com.efteam.omservice.domain.User;
-import com.efteam.omservice.service.UserService;
+import com.umss.dev.training.jtemplate.domain.User;
+import com.umss.dev.training.jtemplate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

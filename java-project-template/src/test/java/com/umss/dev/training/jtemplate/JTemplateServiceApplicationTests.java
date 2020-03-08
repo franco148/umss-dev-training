@@ -1,10 +1,10 @@
-package com.efteam.omservice;
+package com.umss.dev.training.jtemplate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OmserviceApplicationTests {
+class JTemplateServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

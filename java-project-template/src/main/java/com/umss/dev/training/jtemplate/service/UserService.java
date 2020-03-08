@@ -1,7 +1,7 @@
-package com.efteam.omservice.service;
+package com.umss.dev.training.jtemplate.service;
 
-import com.efteam.omservice.domain.User;
-import com.efteam.omservice.repository.UserRepository;
+import com.umss.dev.training.jtemplate.domain.User;
+import com.umss.dev.training.jtemplate.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

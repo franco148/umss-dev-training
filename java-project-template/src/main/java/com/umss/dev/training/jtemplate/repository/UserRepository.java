@@ -1,6 +1,6 @@
-package com.efteam.omservice.repository;
+package com.umss.dev.training.jtemplate.repository;
 
-import com.efteam.omservice.domain.User;
+import com.umss.dev.training.jtemplate.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
