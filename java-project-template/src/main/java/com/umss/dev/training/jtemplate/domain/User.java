@@ -1,6 +1,8 @@
 package com.umss.dev.training.jtemplate.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -15,8 +17,19 @@ public class User {
     private String password;
     @Column(nullable = false)
     private String name;
-
     private String lastName;
+    @ManyToMany
+    @JoinTable
+    (
+        name = "UserRoles",
+        joinColumns = @JoinColumn(name = "userId"),
+        inverseJoinColumns = @JoinColumn(name = "roleId")
+    )
+    private Set<Role> roles = new HashSet<>();
+    @Column(nullable = false)
+    private Boolean isEnabled;
+    @Column(nullable = false)
+    private Boolean isDeleted;
 
 
     public Long getId() {
