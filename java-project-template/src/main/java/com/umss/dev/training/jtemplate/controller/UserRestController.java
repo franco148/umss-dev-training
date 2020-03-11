@@ -1,10 +1,13 @@
 package com.umss.dev.training.jtemplate.controller;
 
 import com.umss.dev.training.jtemplate.domain.User;
+import com.umss.dev.training.jtemplate.dto.request.UserRegistrationDto;
 import com.umss.dev.training.jtemplate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
@@ -26,8 +29,10 @@ public class UserRestController {
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user) {
-        User userResponse = service.save(user);
-        return ResponseEntity.ok(userResponse);
+    public ResponseEntity<User> save(@Valid @RequestBody final UserRegistrationDto user) {
+//        User userResponse = service.save(user);
+//        return ResponseEntity.ok(userResponse);
+        System.out.println("Adding a new user " + user.getEmail());
+        return null;
     }
 }

@@ -14,10 +14,10 @@ public class UserRegistrationDto {
     @Size(min = 6, max = 30, message = "Password should contain between 6 and 30 characters.")
     private String password;
     @NotBlank(message = "Name can not be empty.")
-    @Max(value = 20, message = "Name must have at most 30 characters.")
+    @Size(max = 20, message = "Name must have at most 30 characters.")
     private String name;
     @NotBlank(message = "Last Name can not be empty.")
-    @Max(value = 30, message = "Last Name must have at most 30 characters.")
+    @Size(max = 30, message = "Last Name must have at most 30 characters.")
     private String lastName;
     @NotEmpty(message = "At least one role is required.")
     private Set<RoleRegistrationDto> userRoles = new HashSet<>();
