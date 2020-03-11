@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false)
     private String name;
     private String lastName;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable
     (
         name = "UserRoles",
@@ -70,5 +70,29 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

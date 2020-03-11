@@ -20,7 +20,7 @@ public class UserRegistrationDto {
     @Size(max = 30, message = "Last Name must have at most 30 characters.")
     private String lastName;
     @NotEmpty(message = "At least one role is required.")
-    private Set<RoleRegistrationDto> userRoles = new HashSet<>();
+    private Set<RoleRegistrationDto> roles = new HashSet<>();
 
     @JsonIgnore
     private Boolean isEnabled = false;
@@ -60,12 +60,12 @@ public class UserRegistrationDto {
         this.lastName = lastName;
     }
 
-    public Set<RoleRegistrationDto> getUserRoles() {
-        return userRoles;
+    public Set<RoleRegistrationDto> getRoles() {
+        return roles;
     }
 
-    public void setUserRoles(Set<RoleRegistrationDto> userRoles) {
-        this.userRoles = userRoles;
+    public void setRoles(Set<RoleRegistrationDto> roles) {
+        this.roles = roles;
     }
 
     public Boolean getEnabled() {

@@ -16,7 +16,7 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
     @Column(nullable = false)
-    private Boolean isDelete;
+    private Boolean isDeleted;
 
     public Long getId() {
         return id;
@@ -43,10 +43,10 @@ public class Role {
     }
 
     public Boolean getDelete() {
-        return isDelete;
+        return isDeleted;
     }
 
     public void setDelete(Boolean delete) {
-        isDelete = delete;
+        isDeleted = delete;
     }
 }
