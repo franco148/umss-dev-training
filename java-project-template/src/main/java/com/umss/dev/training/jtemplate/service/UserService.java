@@ -8,7 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,15 +24,28 @@ public class UserService {
         this.modelMapper = modelMapper;
     }
 
-    public  Iterable<User> findAll() {
-        return userRepository.findAll()
-                             .stream()
-                             .sorted(Comparator.comparing(User::getName))
-                             .collect(Collectors.toList());
+    public  Iterable<UserResponseDto> findAll() {
+        List<UserResponseDto> allUsersResponse = userRepository.findAll()
+                                            .stream()
+                                            .sorted(Comparator.comparing(User::getName))
+                                            .map(usr -> {
+                                                UserResponseDto response = modelMapper.map(usr, UserResponseDto.class);
+                                                return response;
+                                            })
+                                            .collect(Collectors.toList());
+
+        return allUsersResponse;
     }
 
-    public  User findById(Long userId) {
-        return userRepository.findById(userId).orElse(null);
+    public  UserResponseDto findById(Long userId) {
+        UserResponseDto foundUser = null;
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (null != user) {
+            foundUser = modelMapper.map(user, UserResponseDto.class);
+        }
+
+        return foundUser;
     }
 
     public UserResponseDto save(UserRegistrationDto userDto) {
