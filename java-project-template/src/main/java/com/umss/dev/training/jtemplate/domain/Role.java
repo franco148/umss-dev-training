@@ -15,8 +15,6 @@ public class Role {
     private RoleEnum authority;
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
-    @Column(nullable = false)
-    private Boolean isDeleted;
 
     public Long getId() {
         return id;
@@ -40,13 +38,5 @@ public class Role {
 
     public void setUsers(Set<User> users) {
         this.users = users;
-    }
-
-    public Boolean getDelete() {
-        return isDeleted;
-    }
-
-    public void setDelete(Boolean delete) {
-        isDeleted = delete;
     }
 }
