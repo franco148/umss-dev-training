@@ -3,6 +3,7 @@ package com.umss.dev.training.jtemplate.service;
 import com.umss.dev.training.jtemplate.domain.User;
 import com.umss.dev.training.jtemplate.dto.request.UserRegistrationDto;
 import com.umss.dev.training.jtemplate.dto.response.UserResponseDto;
+import com.umss.dev.training.jtemplate.exception.UserNotFoundException;
 import com.umss.dev.training.jtemplate.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,12 @@ public class UserService {
         UserResponseDto foundUser = null;
         User user = userRepository.findById(userId).orElse(null);
 
-        if (null != user) {
-            foundUser = modelMapper.map(user, UserResponseDto.class);
+        if (null == user) {
+            String message = "User with ID=%s could not be found.";
+            throw new UserNotFoundException(String.format(message, userId));
         }
+
+        foundUser = modelMapper.map(user, UserResponseDto.class);
 
         return foundUser;
     }

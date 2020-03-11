@@ -1,6 +1,5 @@
 package com.umss.dev.training.jtemplate.controller;
 
-import com.umss.dev.training.jtemplate.domain.User;
 import com.umss.dev.training.jtemplate.dto.request.UserRegistrationDto;
 import com.umss.dev.training.jtemplate.dto.response.UserResponseDto;
 import com.umss.dev.training.jtemplate.service.UserService;
