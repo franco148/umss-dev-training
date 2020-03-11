@@ -4,6 +4,7 @@ import com.umss.dev.training.jtemplate.domain.Role;
 import com.umss.dev.training.jtemplate.domain.User;
 import com.umss.dev.training.jtemplate.dto.request.RoleRegistrationDto;
 import com.umss.dev.training.jtemplate.dto.request.UserRegistrationDto;
+import com.umss.dev.training.jtemplate.dto.response.UserResponseDto;
 import com.umss.dev.training.jtemplate.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,17 +41,9 @@ public class UserRestController {
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@Valid @RequestBody final UserRegistrationDto userDto) {
-//        User userResponse = service.save(user);
-//        return ResponseEntity.ok(userResponse);
-        // User converted = modelMapper.map(user, User.class);
-        for (RoleRegistrationDto roleDto : userDto.getRoles()) {
-            Role myrole = modelMapper.map(roleDto, Role.class);
-            System.out.println(myrole.getAuthority());
-        }
-        User converted = modelMapper.map(userDto, User.class);
-        User persistedUser = service.save(converted);
-        System.out.println("Adding a new user " + userDto.getEmail());
+    public ResponseEntity<UserResponseDto> save(@Valid @RequestBody final UserRegistrationDto userDto) {
+
+        UserResponseDto persistedUser = service.save(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(persistedUser);
     }
 }
