@@ -39,7 +39,7 @@ public class UserService {
     }
 
     public  UserResponseDto findById(Long userId) {
-        UserResponseDto foundUser = null;
+
         User user = userRepository.findById(userId).orElse(null);
 
         if (null == user) {
@@ -47,7 +47,7 @@ public class UserService {
             throw new UserNotFoundException(String.format(message, userId));
         }
 
-        foundUser = modelMapper.map(user, UserResponseDto.class);
+        UserResponseDto foundUser = modelMapper.map(user, UserResponseDto.class);
 
         return foundUser;
     }
