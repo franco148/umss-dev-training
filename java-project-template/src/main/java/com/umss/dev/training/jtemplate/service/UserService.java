@@ -1,24 +1,33 @@
 package com.umss.dev.training.jtemplate.service;
 
+import com.umss.dev.training.jtemplate.domain.Role;
 import com.umss.dev.training.jtemplate.domain.User;
 import com.umss.dev.training.jtemplate.dto.request.UserRegistrationDto;
 import com.umss.dev.training.jtemplate.dto.response.UserResponseDto;
 import com.umss.dev.training.jtemplate.exception.UserNotFoundException;
 import com.umss.dev.training.jtemplate.repository.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
     private ModelMapper modelMapper;
+
+    private Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public UserService(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
@@ -59,4 +68,38 @@ public class UserService {
 
         return userResponse;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String userAccount) throws UsernameNotFoundException {
+
+        Optional<User> foundUser = userRepository.findUserByEmail(userAccount);
+        if (!foundUser.isPresent()) {
+            String errorMessage = "User with account = %s does not exist.";
+            logger.error("Login error: " + String.format(errorMessage, userAccount));
+            throw new UsernameNotFoundException(String.format(errorMessage, userAccount));
+        }
+
+        Set<GrantedAuthority> authorities = getUserAuthorities(userAccount, foundUser.get().getRoles());
+
+        return new org.springframework.security.core.userdetails.User(foundUser.get().getEmail(), foundUser.get().getPassword(), foundUser.get().getEnabled(), true, true, true, authorities);
+    }
+
+    //region Utilities
+    private Set<GrantedAuthority> getUserAuthorities(String userAccount, Set<Role> userRoles) {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        for (Role role : userRoles) {
+            logger.info("Role: ".concat(role.getAuthority().name()));
+            authorities.add(new SimpleGrantedAuthority(role.getAuthority().name()));
+        }
+
+        if (authorities.isEmpty()) {
+            String errorMessage = "User with account = %s does not have assigned roles.";
+            logger.error("Login error: " + String.format(errorMessage, userAccount));
+            throw new UsernameNotFoundException(String.format(errorMessage, userAccount));
+        }
+
+        return authorities;
+    }
+    //endregion
 }
