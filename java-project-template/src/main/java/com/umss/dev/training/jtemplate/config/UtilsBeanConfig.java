@@ -3,6 +3,7 @@ package com.umss.dev.training.jtemplate.config;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class UtilsBeanConfig {
@@ -13,5 +14,10 @@ public class UtilsBeanConfig {
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
 
         return modelMapper;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
