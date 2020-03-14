@@ -1,11 +1,16 @@
 package com.umss.dev.training.jtemplate.config;
 
+import com.umss.dev.training.jtemplate.handlers.filter.JwtAuthenticationFilter;
+import com.umss.dev.training.jtemplate.handlers.filter.JwtAuthorizationFilter;
+import com.umss.dev.training.jtemplate.service.JwtService;
 import com.umss.dev.training.jtemplate.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
@@ -14,14 +19,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserService userService;
     private BCryptPasswordEncoder passwordEncoder;
+    private JwtService jwtService;
 
 
-    public SecurityConfig(UserService userService, BCryptPasswordEncoder passwordEncoder) {
+    public SecurityConfig(UserService userService, BCryptPasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
 
+    @Autowired
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -46,6 +54,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 2. SECOND VERSION
         http.authorizeRequests().antMatchers("/", "/h2-console/**").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                    .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtService))
+                    .addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtService))
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }
