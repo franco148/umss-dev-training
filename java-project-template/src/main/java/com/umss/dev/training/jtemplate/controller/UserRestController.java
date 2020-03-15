@@ -5,6 +5,8 @@ import com.umss.dev.training.jtemplate.dto.response.UserResponseDto;
 import com.umss.dev.training.jtemplate.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,12 +22,14 @@ public class UserRestController {
         this.service = service;
     }
 
+    @Secured("USER")
     @GetMapping
     public ResponseEntity<Iterable<UserResponseDto>> findAll() {
         Iterable<UserResponseDto> usersResponse = service.findAll();
         return ResponseEntity.ok(usersResponse);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> findById(@PathVariable("id") Long id) {
         UserResponseDto userResponse = service.findById(id);

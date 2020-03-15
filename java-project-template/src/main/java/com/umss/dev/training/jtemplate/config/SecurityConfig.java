@@ -14,8 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Configuration
+//@EnableWebSecurity // Remove the annotation as it is already done by SpringBoot.
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserService userService;
@@ -64,4 +65,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.headers().frameOptions().disable();
     }
+
+    // https://stackoverflow.com/questions/48822278/spring-5-no-servletcontext-set-exception
+//    @Bean
+//    public GrantedAuthorityDefaults grantedAuthorityDefaults() {
+//        return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix
+//    }
 }
