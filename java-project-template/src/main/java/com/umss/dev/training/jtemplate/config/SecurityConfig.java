@@ -6,6 +6,7 @@ import com.umss.dev.training.jtemplate.service.JwtService;
 import com.umss.dev.training.jtemplate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -54,11 +55,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 2. SECOND VERSION
         http.authorizeRequests().antMatchers("/", "/h2-console/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .anyRequest().authenticated()
                 .and()
                     .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtService))
                     .addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtService))
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.headers().frameOptions().disable();
     }
 }

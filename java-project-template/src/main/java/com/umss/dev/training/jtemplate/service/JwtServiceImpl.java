@@ -24,8 +24,8 @@ public class JwtServiceImpl implements JwtService {
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
 
-    @Value("${umss.dev.training.jwt.expiration-date}")
-    private long expirationTime;
+    @Value("#{new Long('${umss.dev.training.jwt.expiration-date}')}")
+    private Long expirationTime;
     @Value("${umss.dev.training.jwt.token-secret}")
     private String tokenSecret;
 
