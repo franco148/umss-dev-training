@@ -9,12 +9,12 @@ import com.umss.dev.training.jtemplate.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,12 +26,14 @@ public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
     private ModelMapper modelMapper;
+    private BCryptPasswordEncoder passwordEncoder;
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public  Iterable<UserResponseDto> findAll() {
@@ -63,6 +65,8 @@ public class UserService implements UserDetailsService {
 
     public UserResponseDto save(UserRegistrationDto userDto) {
         User converted = modelMapper.map(userDto, User.class);
+        converted.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
         User persistedUser = userRepository.save(converted);
         UserResponseDto userResponse = modelMapper.map(persistedUser, UserResponseDto.class);
 
