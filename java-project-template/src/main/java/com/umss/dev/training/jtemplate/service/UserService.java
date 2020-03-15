@@ -1,11 +1,11 @@
 package com.umss.dev.training.jtemplate.service;
 
-import com.umss.dev.training.jtemplate.domain.Role;
-import com.umss.dev.training.jtemplate.domain.User;
-import com.umss.dev.training.jtemplate.dto.request.UserRegistrationDto;
-import com.umss.dev.training.jtemplate.dto.response.UserResponseDto;
+import com.umss.dev.training.jtemplate.persistence.domain.Role;
+import com.umss.dev.training.jtemplate.persistence.domain.User;
+import com.umss.dev.training.jtemplate.common.dto.request.UserRegistrationDto;
+import com.umss.dev.training.jtemplate.common.dto.response.UserResponseDto;
 import com.umss.dev.training.jtemplate.exception.UserNotFoundException;
-import com.umss.dev.training.jtemplate.repository.UserRepository;
+import com.umss.dev.training.jtemplate.persistence.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

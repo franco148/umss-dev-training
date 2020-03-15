@@ -1,6 +1,6 @@
-package com.umss.dev.training.jtemplate.repository;
+package com.umss.dev.training.jtemplate.persistence.repository;
 
-import com.umss.dev.training.jtemplate.domain.User;
+import com.umss.dev.training.jtemplate.persistence.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

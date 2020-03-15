@@ -1,4 +1,4 @@
-package com.umss.dev.training.jtemplate.domain;
+package com.umss.dev.training.jtemplate.persistence.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;

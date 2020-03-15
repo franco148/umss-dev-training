@@ -43,9 +43,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             logger.info("Username from request parameter (form-data): " + username);
             logger.info("Password from request parameter (form-data): " + password);
         } else {
-            com.umss.dev.training.jtemplate.domain.User user = null;
+            com.umss.dev.training.jtemplate.persistence.domain.User user = null;
             try {
-                user = new ObjectMapper().readValue(request.getInputStream(), com.umss.dev.training.jtemplate.domain.User.class);
+                user = new ObjectMapper().readValue(request.getInputStream(), com.umss.dev.training.jtemplate.persistence.domain.User.class);
 
                 username = user.getEmail();
                 password = user.getPassword();

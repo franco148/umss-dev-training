@@ -1,34 +1,17 @@
-package com.umss.dev.training.jtemplate.domain;
+package com.umss.dev.training.jtemplate.common.dto.response;
 
-import javax.persistence.*;
-import java.util.HashSet;
+import com.umss.dev.training.jtemplate.common.dto.request.RoleRegistrationDto;
+
 import java.util.Set;
 
-@Entity
-@Table(name = "users")
-public class User {
+public class UserResponseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(nullable = false, unique = true, length = 50)
     private String email;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
     private String name;
     private String lastName;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable
-    (
-        name = "UserRoles",
-        joinColumns = @JoinColumn(name = "userId"),
-        inverseJoinColumns = @JoinColumn(name = "roleId")
-    )
-    private Set<Role> roles = new HashSet<>();
-    @Column(nullable = false)
+    private Set<RoleRegistrationDto> roles;
     private Boolean isEnabled;
-    @Column(nullable = false)
     private Boolean isDeleted;
 
 
@@ -48,14 +31,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getName() {
         return name;
     }
@@ -72,11 +47,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Set<Role> getRoles() {
+    public Set<RoleRegistrationDto> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<RoleRegistrationDto> roles) {
         this.roles = roles;
     }
 

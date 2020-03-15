@@ -1,32 +1,44 @@
-package com.umss.dev.training.jtemplate.dto.request;
+package com.umss.dev.training.jtemplate.persistence.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.validation.constraints.*;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserRegistrationDto {
+@Entity
+@Table(name = "users")
+public class User {
 
-    @Email(message = "Email should be a valid e-mail address.")
-    @Size(min = 5, max = 50, message = "Email should have at least 5 characters and at most 50.")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    @Column(nullable = false, unique = true, length = 50)
     private String email;
-    @Size(min = 6, max = 30, message = "Password should contain between 6 and 30 characters.")
+    @Column(nullable = false)
     private String password;
-    @NotBlank(message = "Name can not be empty.")
-    @Size(max = 20, message = "Name must have at most 30 characters.")
+    @Column(nullable = false)
     private String name;
-    @NotBlank(message = "Last Name can not be empty.")
-    @Size(max = 30, message = "Last Name must have at most 30 characters.")
     private String lastName;
-    @NotEmpty(message = "At least one role is required.")
-    private Set<RoleRegistrationDto> roles = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
+    (
+        name = "UserRoles",
+        joinColumns = @JoinColumn(name = "userId"),
+        inverseJoinColumns = @JoinColumn(name = "roleId")
+    )
+    private Set<Role> roles = new HashSet<>();
+    @Column(nullable = false)
+    private Boolean isEnabled;
+    @Column(nullable = false)
+    private Boolean isDeleted;
 
-    @JsonIgnore
-    private Boolean isEnabled = false;
-    @JsonIgnore
-    private Boolean isDeleted = false;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;
@@ -60,11 +72,11 @@ public class UserRegistrationDto {
         this.lastName = lastName;
     }
 
-    public Set<RoleRegistrationDto> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<RoleRegistrationDto> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 

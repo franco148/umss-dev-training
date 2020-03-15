@@ -1,4 +1,4 @@
-package com.umss.dev.training.jtemplate.config;
+package com.umss.dev.training.jtemplate.common.config;
 
 import com.umss.dev.training.jtemplate.handlers.filter.JwtAuthenticationFilter;
 import com.umss.dev.training.jtemplate.handlers.filter.JwtAuthorizationFilter;

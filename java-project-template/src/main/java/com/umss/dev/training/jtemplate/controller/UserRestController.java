@@ -1,7 +1,7 @@
 package com.umss.dev.training.jtemplate.controller;
 
-import com.umss.dev.training.jtemplate.dto.request.UserRegistrationDto;
-import com.umss.dev.training.jtemplate.dto.response.UserResponseDto;
+import com.umss.dev.training.jtemplate.common.dto.request.UserRegistrationDto;
+import com.umss.dev.training.jtemplate.common.dto.response.UserResponseDto;
 import com.umss.dev.training.jtemplate.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
