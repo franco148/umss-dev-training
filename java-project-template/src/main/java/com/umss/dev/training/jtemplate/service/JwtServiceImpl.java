@@ -1,7 +1,7 @@
 package com.umss.dev.training.jtemplate.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.umss.dev.training.jtemplate.handlers.SimpleGrantedAuthorityMixin;
+import com.umss.dev.training.jtemplate.event.handler.SimpleGrantedAuthorityMixin;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

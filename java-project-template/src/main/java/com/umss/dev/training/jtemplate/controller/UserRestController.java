@@ -9,6 +9,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import javax.validation.Valid;
 
 @RestController
@@ -36,6 +37,7 @@ public class UserRestController {
         return ResponseEntity.ok(userResponse);
     }
 
+    @PermitAll
     @PostMapping
     public ResponseEntity<UserResponseDto> save(@Valid @RequestBody final UserRegistrationDto userDto) {
 

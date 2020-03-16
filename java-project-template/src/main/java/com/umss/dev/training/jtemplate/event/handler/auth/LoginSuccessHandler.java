@@ -1,4 +1,4 @@
-package com.umss.dev.training.jtemplate.handlers.auth;
+package com.umss.dev.training.jtemplate.event.handler.auth;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -25,9 +25,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
         flashMapManager.saveOutputFlashMap(flashMap, request, response);
 
-        if(authentication != null) {
-            logger.info("User '"+authentication.getName()+"' has logged in successfully.");
-        }
+        logger.info("User '"+authentication.getName()+"' has logged in successfully.");
 
         super.onAuthenticationSuccess(request, response, authentication);
     }

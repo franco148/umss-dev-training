@@ -1,4 +1,4 @@
-package com.umss.dev.training.jtemplate.handlers.filter;
+package com.umss.dev.training.jtemplate.event.handler.filter;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;

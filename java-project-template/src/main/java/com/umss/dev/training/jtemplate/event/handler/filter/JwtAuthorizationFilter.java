@@ -1,4 +1,4 @@
-package com.umss.dev.training.jtemplate.handlers.filter;
+package com.umss.dev.training.jtemplate.event.handler.filter;
 
 import com.umss.dev.training.jtemplate.service.JwtService;
 import com.umss.dev.training.jtemplate.service.JwtServiceImpl;

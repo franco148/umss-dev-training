@@ -1,7 +1,7 @@
 package com.umss.dev.training.jtemplate.common.config;
 
-import com.umss.dev.training.jtemplate.handlers.filter.JwtAuthenticationFilter;
-import com.umss.dev.training.jtemplate.handlers.filter.JwtAuthorizationFilter;
+import com.umss.dev.training.jtemplate.event.handler.filter.JwtAuthenticationFilter;
+import com.umss.dev.training.jtemplate.event.handler.filter.JwtAuthorizationFilter;
 import com.umss.dev.training.jtemplate.service.JwtService;
 import com.umss.dev.training.jtemplate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 2. SECOND VERSION
         http.authorizeRequests().antMatchers("/", "/h2-console/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/users").permitAll()
+//                .antMatchers(HttpMethod.POST, "/users").permitAll() // This can be added directly to the endpoint with @PermitAll annotation.
                 .anyRequest().authenticated()
                 .and()
                     .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtService))

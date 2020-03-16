@@ -1,4 +1,4 @@
-package com.umss.dev.training.jtemplate.handlers;
+package com.umss.dev.training.jtemplate.event.handler;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
