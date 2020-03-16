@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 2. SECOND VERSION
         http.authorizeRequests().antMatchers("/", "/h2-console/**").permitAll()
 //                .antMatchers(HttpMethod.POST, "/users").permitAll() // This can be added directly to the endpoint with @PermitAll annotation.
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated() // If this is still enabled, @PermitAll is not going to work
                 .and()
                     .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtService))
                     .addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtService))
