@@ -7,7 +7,7 @@ import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-public class UtilsBeanConfig {
+public class BeanUtilsConfig {
 
     @Bean
     public ModelMapper modelMapper() {
