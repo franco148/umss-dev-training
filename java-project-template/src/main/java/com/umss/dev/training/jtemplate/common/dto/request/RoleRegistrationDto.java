@@ -1,6 +1,6 @@
-package com.umss.dev.training.jtemplate.dto.request;
+package com.umss.dev.training.jtemplate.common.dto.request;
 
-import com.umss.dev.training.jtemplate.domain.RoleEnum;
+import com.umss.dev.training.jtemplate.persistence.domain.RoleEnum;
 
 import javax.validation.constraints.NotNull;
 
