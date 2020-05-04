@@ -11,7 +11,7 @@ class App extends Component {
     }
 
     hello = () => {
-        fetch('/users/test-react')
+        fetch('/api/users/test-react')
             .then(response => response.text())
             .then(message => {
                 this.setState({message: message});

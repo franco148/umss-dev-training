@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserRestController {
 
     private UserService service;
