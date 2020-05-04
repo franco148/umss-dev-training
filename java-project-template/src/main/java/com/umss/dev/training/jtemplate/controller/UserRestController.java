@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/users")
@@ -43,5 +44,12 @@ public class UserRestController {
 
         UserResponseDto persistedUser = service.save(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(persistedUser);
+    }
+
+    @PermitAll
+    @GetMapping("/test-react")
+    public ResponseEntity<String> getTestMessageForReactApp() {
+        String testMessage = "This is a test message sent from the Server to the React APP at " + LocalDateTime.now();
+        return ResponseEntity.ok(testMessage);
     }
 }
