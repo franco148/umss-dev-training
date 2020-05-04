@@ -7,11 +7,11 @@ class App extends Component {
     state = {};
 
     componentDidMount() {
-        setInterval(this.hello, 250);
+        setInterval(this.hello, 1000);
     }
 
     hello = () => {
-        fetch('/api/users/test-react')
+        fetch('/users/test-react')
             .then(response => response.text())
             .then(message => {
                 this.setState({message: message});

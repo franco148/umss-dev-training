@@ -49,7 +49,7 @@ public class UserRestController {
     @PermitAll
     @GetMapping("/test-react")
     public ResponseEntity<String> getTestMessageForReactApp() {
-        String testMessage = "This is a test message sent from the Server to the React APP at " + LocalDateTime.now();
+        String testMessage = "Test message from SpringBoot Server at " + LocalDateTime.now();
         return ResponseEntity.ok(testMessage);
     }
 }
